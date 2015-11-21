@@ -6,8 +6,8 @@
 //  Copyright © 2015 Victor Bryksin. All rights reserved.
 //
 
-#import "VMStream.h"
+#import "VMFullProcessingStream.h"
 
-@interface VMReversedStream<T> : VMStream<T>
+@interface VMReversedStream : VMFullProcessingStream
 
 @end

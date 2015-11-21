@@ -67,7 +67,7 @@ typedef struct {
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Enumerable stream on %@", self.enumerable];
+    return [NSString stringWithFormat:@"%@ -> enumerate", self.enumerable];
 }
 
 @end

@@ -13,6 +13,11 @@
 #import "VMRangeStream.h"
 #import "VMSortedStream.h"
 #import "VMEnumerableStream.h"
+#import "VMReversedStream.h"
+#import "VMTakeStream.h"
+#import "VMSkipStream.h"
+#import "VMJoinStream.h"
+#import <objc/runtime.h>
 
 @interface VMStream () {
     @private
@@ -117,6 +122,44 @@
     return [self sort:^NSComparisonResult(id  _Nonnull first, id  _Nonnull second) {
         return -compareBlock(first, second);
     }];
+}
+
+- (VMStream *)reverse {
+    return [[VMReversedStream alloc] initWithEnumerable:self];
+}
+
+- (VMStream *)take:(NSUInteger)count {
+    return [[VMTakeStream alloc] initWithEnumerable:self takeCount:count];
+}
+
+- (VMStream *)skip:(NSUInteger)count {
+    return [[VMSkipStream alloc] initWithEnumerable:self skipCount:count];
+}
+
+- (VMStream *)join:(id<NSFastEnumeration>)second byKey:(id)keySelector matchesKey:(id)secondKeySelector byEquality:(VMStreamEqualsBlock)equalsBlock resultObject:(VMStreamJoinBlock)joinBlock options:(VMStreamJoinOptions)options {
+    VMStreamKeySelectorBlock processedKeySelector = [self _processKeySelector:keySelector];
+    VMStreamKeySelectorBlock processedSecondKeySelector = [self _processKeySelector:secondKeySelector];
+    return [[VMJoinStream alloc] initWithEnumerable:self secondEnumerable:second keySelector:processedKeySelector secondKeySelector:processedSecondKeySelector keyEqualsBlock:equalsBlock joinBlock:joinBlock options:options];
+}
+
+- (VMStream *)innerJoin:(id<NSFastEnumeration>)second byCondition:(VMStreamEqualsBlock)conditionBlock resultObject:(VMStreamJoinBlock)joinBlock {
+    return [[VMJoinStream alloc] initWithEnumerable:self secondEnumerable:second keySelector:^id _Nullable(id  _Nonnull obj) { return obj; } secondKeySelector:^id _Nullable(id  _Nonnull obj) { return obj; } keyEqualsBlock:conditionBlock joinBlock:joinBlock options:VMStreamInnerJoin];
+}
+
+- (VMStream *)innerJoin:(id<NSFastEnumeration>)second byKey:(id)keySelector matchesKey:(id)secondKeySelector resultObject:(VMStreamJoinBlock)joinBlock {
+    return nil;
+}
+
+- (VMStreamKeySelectorBlock)_processKeySelector:(id)keySelector {
+    if ([keySelector isKindOfClass:NSClassFromString(@"NSBlock")]) {
+        return keySelector;
+    }
+    if ([keySelector isKindOfClass:[NSString class]]) {
+        return [^(id obj) {
+            [obj objectForKey:keySelector];
+        } copy];
+    }
+    return nil;
 }
 
 - (NSArray *)materialize {

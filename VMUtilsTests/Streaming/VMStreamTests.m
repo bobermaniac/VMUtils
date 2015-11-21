@@ -44,12 +44,24 @@
         int i[2] = { [first intValue], [second intValue] };
         return abs(i[1] - i[0]) < 2;
     }];
+    s = [s skip:5];
+    s = [s take:5];
+    s = [s reverse];
     NSArray *r = [s materialize];
     NSLog(@"%@", r);
 }
 
 - (void)testSort {
     NSLog(@"%@", [[@[ @5, @3, @1, @1, @8 ].stream sort] materialize]);
+}
+
+- (void)testJoin {
+    VMStream *s = [@[ @"Beta", @"Master", @"Lol", @"Whatever" ].stream innerJoin:@[ @1, @2, @3, @4, @5 ] byCondition:^BOOL(NSString * _Nonnull first, NSNumber * _Nonnull second) {
+        return first.length == second.intValue;
+    } resultObject:^id _Nonnull(NSString * _Nullable left, NSNumber * _Nullable right) {
+        return @{ @"s" : left, @"l" : right };
+    }];
+    NSLog(@"%@", [s materialize]);
 }
 
 @end

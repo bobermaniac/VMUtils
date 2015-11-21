@@ -31,7 +31,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Mapping stream on %@", self.enumerable];
+    return [NSString stringWithFormat:@"%@ -> map", self.enumerable];
 }
 
 @end

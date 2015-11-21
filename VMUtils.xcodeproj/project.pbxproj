@@ -32,6 +32,12 @@
 		93F9B4E41BFF0605002761DB /* VMSortedStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F9B4E21BFF0605002761DB /* VMSortedStream.m */; };
 		93F9B4E81BFF29E4002761DB /* NSArray+Streaming.h in Headers */ = {isa = PBXBuildFile; fileRef = 93F9B4E61BFF29E4002761DB /* NSArray+Streaming.h */; };
 		93F9B4E91BFF29E4002761DB /* NSArray+Streaming.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F9B4E71BFF29E4002761DB /* NSArray+Streaming.m */; };
+		E769421A1BFFB32C009B7FED /* VMJoinStream.h in Headers */ = {isa = PBXBuildFile; fileRef = E76942181BFFB32C009B7FED /* VMJoinStream.h */; };
+		E769421B1BFFB32C009B7FED /* VMJoinStream.m in Sources */ = {isa = PBXBuildFile; fileRef = E76942191BFFB32C009B7FED /* VMJoinStream.m */; };
+		E77783E31BFFAD4500F784F5 /* VMTakeStream.h in Headers */ = {isa = PBXBuildFile; fileRef = E77783E11BFFAD4500F784F5 /* VMTakeStream.h */; };
+		E77783E41BFFAD4500F784F5 /* VMTakeStream.m in Sources */ = {isa = PBXBuildFile; fileRef = E77783E21BFFAD4500F784F5 /* VMTakeStream.m */; };
+		E77783E71BFFAE2400F784F5 /* VMSkipStream.h in Headers */ = {isa = PBXBuildFile; fileRef = E77783E51BFFAE2400F784F5 /* VMSkipStream.h */; };
+		E77783E81BFFAE2400F784F5 /* VMSkipStream.m in Sources */ = {isa = PBXBuildFile; fileRef = E77783E61BFFAE2400F784F5 /* VMSkipStream.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +80,12 @@
 		93F9B4E61BFF29E4002761DB /* NSArray+Streaming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Streaming.h"; sourceTree = "<group>"; };
 		93F9B4E71BFF29E4002761DB /* NSArray+Streaming.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Streaming.m"; sourceTree = "<group>"; };
 		93F9B4EA1BFF31AB002761DB /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
+		E76942181BFFB32C009B7FED /* VMJoinStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VMJoinStream.h; sourceTree = "<group>"; };
+		E76942191BFFB32C009B7FED /* VMJoinStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VMJoinStream.m; sourceTree = "<group>"; };
+		E77783E11BFFAD4500F784F5 /* VMTakeStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VMTakeStream.h; sourceTree = "<group>"; };
+		E77783E21BFFAD4500F784F5 /* VMTakeStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VMTakeStream.m; sourceTree = "<group>"; };
+		E77783E51BFFAE2400F784F5 /* VMSkipStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VMSkipStream.h; sourceTree = "<group>"; };
+		E77783E61BFFAE2400F784F5 /* VMSkipStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VMSkipStream.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +181,12 @@
 				93F9B4DE1BFE0CC9002761DB /* VMDistinctStream.m */,
 				93F9B4E11BFF0605002761DB /* VMSortedStream.h */,
 				93F9B4E21BFF0605002761DB /* VMSortedStream.m */,
+				E77783E11BFFAD4500F784F5 /* VMTakeStream.h */,
+				E77783E21BFFAD4500F784F5 /* VMTakeStream.m */,
+				E77783E51BFFAE2400F784F5 /* VMSkipStream.h */,
+				E77783E61BFFAE2400F784F5 /* VMSkipStream.m */,
+				E76942181BFFB32C009B7FED /* VMJoinStream.h */,
+				E76942191BFFB32C009B7FED /* VMJoinStream.m */,
 			);
 			path = Internals;
 			sourceTree = "<group>";
@@ -203,9 +221,12 @@
 			files = (
 				934AAD181BE8BE01008BEA9D /* VMReaderWriterLock.h in Headers */,
 				93F9B4D71BFDF82F002761DB /* VMRangeStream.h in Headers */,
+				E769421A1BFFB32C009B7FED /* VMJoinStream.h in Headers */,
 				93F9B4E31BFF0605002761DB /* VMSortedStream.h in Headers */,
 				93F9B4DB1BFDFC1A002761DB /* VMFullProcessingStream.h in Headers */,
 				934AACFF1BE8BDDD008BEA9D /* VMUtils.h in Headers */,
+				E77783E31BFFAD4500F784F5 /* VMTakeStream.h in Headers */,
+				E77783E71BFFAE2400F784F5 /* VMSkipStream.h in Headers */,
 				9380C6531BFDCCAF00190D72 /* VMMapStream.h in Headers */,
 				93F9B4E81BFF29E4002761DB /* NSArray+Streaming.h in Headers */,
 				93945C1F1BFC6372008ED2DC /* VMStream+Protected.h in Headers */,
@@ -319,8 +340,11 @@
 				93F9B4D81BFDF82F002761DB /* VMRangeStream.m in Sources */,
 				93F9B4DC1BFDFC1A002761DB /* VMFullProcessingStream.m in Sources */,
 				93F9B4E01BFE0CC9002761DB /* VMDistinctStream.m in Sources */,
+				E77783E81BFFAE2400F784F5 /* VMSkipStream.m in Sources */,
 				93F9B4E41BFF0605002761DB /* VMSortedStream.m in Sources */,
 				934AAD191BE8BE01008BEA9D /* VMReaderWriterLock.m in Sources */,
+				E77783E41BFFAD4500F784F5 /* VMTakeStream.m in Sources */,
+				E769421B1BFFB32C009B7FED /* VMJoinStream.m in Sources */,
 				93F9B4E91BFF29E4002761DB /* NSArray+Streaming.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

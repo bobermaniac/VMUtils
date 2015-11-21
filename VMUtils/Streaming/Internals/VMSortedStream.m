@@ -74,7 +74,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Sorting stream on %@", self.enumerable];
+    return [NSString stringWithFormat:@"%@ -> sort", self.enumerable];
 }
 
 @end

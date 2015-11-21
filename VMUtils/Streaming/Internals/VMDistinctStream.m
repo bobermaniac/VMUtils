@@ -47,7 +47,7 @@ start:
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Distinct stream on %@", self.enumerable];
+    return [NSString stringWithFormat:@"%@ -> distinct", self.enumerable];
 }
 
 @end

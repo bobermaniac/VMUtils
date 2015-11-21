@@ -41,7 +41,7 @@
     if (!self.range.length) {
         return [NSString stringWithFormat:@"Empty range stream"];
     }
-    return [NSString stringWithFormat:@"Range stream from %lu to %lu", self.range.location, self.range.location + self.range.length];
+    return [NSString stringWithFormat:@"Range from %lu to %lu", self.range.location, self.range.location + self.range.length];
 }
 
 @end
