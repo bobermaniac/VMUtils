@@ -147,7 +147,17 @@
 }
 
 - (VMStream *)innerJoin:(id<NSFastEnumeration>)second byKey:(id)keySelector matchesKey:(id)secondKeySelector resultObject:(VMStreamJoinBlock)joinBlock {
-    return nil;
+    VMStreamKeySelectorBlock processedKeySelector = [self _processKeySelector:keySelector];
+    VMStreamKeySelectorBlock processedSecondKeySelector = [self _processKeySelector:secondKeySelector];
+    return [[VMJoinStream alloc] initWithEnumerable:self secondEnumerable:second keySelector:processedKeySelector secondKeySelector:processedSecondKeySelector keyEqualsBlock:^BOOL(id  _Nonnull first, id  _Nonnull second) {
+        if (first) {
+            return [first isEqual:second];
+        }
+        if (second) {
+            return [second isEqual:first];
+        }
+        return NO;
+    } joinBlock:joinBlock options:VMStreamInnerJoin];
 }
 
 - (VMStreamKeySelectorBlock)_processKeySelector:(id)keySelector {

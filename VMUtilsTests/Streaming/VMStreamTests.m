@@ -34,7 +34,7 @@
 - (void)testPerformanceExample {
     // This is an example of a performance test case.
     [self measureBlock:^{
-        // Put the code you want to measure the time of here.
+
     }];
 }
 
@@ -61,6 +61,12 @@
     } resultObject:^id _Nonnull(NSString * _Nullable left, NSNumber * _Nullable right) {
         return @{ @"s" : left, @"l" : right };
     }];
+    s = [s map:^id _Nonnull(NSDictionary * _Nonnull obj) {
+        return [NSString stringWithFormat:@"%@ -> %@", obj[@"s"], obj[@"l"]];
+    }];
+    s = [s sort:^NSComparisonResult(id  _Nonnull first, id  _Nonnull second) {
+        return [@([first length]) compare:@([second length])];
+    } ascending:NO];
     NSLog(@"%@", [s materialize]);
 }
 

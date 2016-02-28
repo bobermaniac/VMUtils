@@ -21,6 +21,14 @@ typedef NS_ENUM(NSUInteger, VMStreamJoinOptions) {
     VMStreamLeftOuterJoin,
 };
 
+@class VMStream<T>;
+
+@interface VMStreamGroup<T> : NSObject
+
+@property (nonatomic, strong, readonly, nullable) id groupId;
+@property (nonatomic, strong, readonly, nonnull) VMStream<T> *items;
+
+@end
 
 @interface VMStream<T> : NSObject<NSFastEnumeration>
 
@@ -47,23 +55,11 @@ typedef NS_ENUM(NSUInteger, VMStreamJoinOptions) {
 - (nonnull VMStream<T> *)distinct;
 - (nonnull VMStream<T> *)distinct:(nonnull VMStreamEqualsBlock)equalsBlock;
 
-/**
- *  Join stream with second stream by matching stream key with second stream key and processing matching result with joing block
- *
- *  @param second            Second stream
- *  @param keySelector       Key selector for original stream object (can be SEL, string or VMStreamKeySelectorBlock)
- *  @param secondKeySelector Key selector for second stream object (can be SEL, string or VMStreamKeySelectorBlock)
- *  @param equalsBlock       Equality comparer for keys
- *  @param joinBlock         Block to join found object
- *  @param options           Join options
- *
- *  @return Stream with processed joined objects
- */
 - (nonnull VMStream *)join:(nonnull id<NSFastEnumeration>)second byKey:(nonnull id)keySelector matchesKey:(nonnull id)secondKeySelector byEquality:(nullable VMStreamEqualsBlock)equalsBlock resultObject:(nonnull VMStreamJoinBlock)joinBlock options:(VMStreamJoinOptions)options;
-
 - (nonnull VMStream *)innerJoin:(nonnull id<NSFastEnumeration>)second byCondition:(nonnull VMStreamEqualsBlock)conditionBlock resultObject:(nonnull VMStreamJoinBlock)joinBlock;
-
 - (nonnull VMStream *)innerJoin:(nonnull id<NSFastEnumeration>)second byKey:(nonnull id)keySelector matchesKey:(nonnull id)secondKeySelector resultObject:(nonnull VMStreamJoinBlock)joinBlock;
+
+- (nonnull VMStream<VMStreamGroup<T> *> *)groupBy:(nonnull id)keySelector;
 
 - (nonnull NSArray *)materialize;
 
